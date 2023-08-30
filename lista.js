@@ -79,8 +79,42 @@ class List {
 
 const concatenar = (head1, head2) =>{
     const listaOrdenada = new List();
-    while(head1 && head2 !== null){
-        
+    let current1 = head1.head;
+    let current2 = head2.head;
+    while(current1 !== null || current2 !== null ){
+        if(current1 === null){
+            listaOrdenada.append(current2.value);
+            current2 = current2.next
+        } else if (current2 === null) {
+            listaOrdenada.append(current1.value);
+            current1 = current1.next
+        } else{
+            if(current1.value < current2.value){
+                listaOrdenada.append(current1.value);
+                current1 = current1.next;
+            }else{
+                listaOrdenada.append(current2.value);
+                current2 = current2.next;
+            }
+        }
     }
 
+    return listaOrdenada
+
 }
+
+//uso
+const list1 = new List();
+list1.append(5);
+list1.append(7);
+list1.append(2);
+
+const list2 = new List();
+list2.append(8);
+list2.append(4);
+list2.append(10);
+
+//Concatena y ordena
+const listaConcatenada = concatenar(list1,list2);
+
+listaConcatenada.print();
